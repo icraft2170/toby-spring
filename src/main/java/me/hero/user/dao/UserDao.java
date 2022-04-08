@@ -4,7 +4,7 @@ import me.hero.user.domain.User;
 
 import java.sql.*;
 
-public class UserDao {
+public abstract class UserDao {
 
     public void add(User user) throws SQLException, ClassNotFoundException {
         Connection c = getConnection();
@@ -40,24 +40,6 @@ public class UserDao {
     }
 
 
-    private Connection getConnection() throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        return DriverManager.getConnection("jdbc:mysql://localhost/toby", "toby", "see3470");
-    }
+    public abstract Connection getConnection() throws ClassNotFoundException, SQLException;
 
-
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        UserDao dao = new UserDao();
-        User user = new User();
-        user.setId("whiteship");
-        user.setName("백기선");
-        user.setPassword("married");
-
-        dao.add(user);
-
-        System.out.println(user.getId() + " 등록 성공");
-
-        User findUser = dao.get(user.getId());
-        System.out.println(findUser.getName());
-    }
 }
