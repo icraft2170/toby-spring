@@ -5,7 +5,7 @@ import me.hero.user.domain.User;
 import java.sql.*;
 
 public class UserDao {
-    private final SimpleConnectionMaker connectionMaker = new SimpleConnectionMaker();
+    private final ConnectionMaker connectionMaker = new SimpleConnectionMaker();
 
     public void add(User user) throws SQLException, ClassNotFoundException {
         Connection c = connectionMaker.getConnection();
