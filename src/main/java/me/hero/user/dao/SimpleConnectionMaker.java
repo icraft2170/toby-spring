@@ -4,10 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DUserDao extends UserDao{
-    @Override
+public class SimpleConnectionMaker {
     public Connection getConnection() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        return DriverManager.getConnection("jdbc:mysql://localhost/toby", "toby", "see3470"); // 다른 DB ...
+        return DriverManager.getConnection("jdbc:mysql://localhost/toby", "toby", "see3470");
     }
 }
