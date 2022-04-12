@@ -1,7 +1,6 @@
 package me.hero.user;
 
 import me.hero.user.dao.DaoFactory;
-import me.hero.user.dao.SimpleConnectionMaker;
 import me.hero.user.dao.UserDao;
 import me.hero.user.domain.User;
 import org.springframework.context.ApplicationContext;
