@@ -25,5 +25,13 @@ public class UserDaoTest {
 
         User findUser = dao.get(user.getId());
         System.out.println(findUser.getName());
+
+        if (!user.getName().equals(findUser.getName())) {
+            System.out.println("테스트 실패 (name)");
+        } else if (!user.getPassword().equals(findUser.getPassword())) {
+            System.out.println("테스트 실패 (password)");
+        } else {
+            System.out.println("조회 테스트 성공");;
+        }
     }
 }
