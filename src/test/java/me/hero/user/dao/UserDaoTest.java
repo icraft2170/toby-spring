@@ -1,15 +1,19 @@
-package me.hero.user;
+package me.hero.user.dao;
 
-import me.hero.user.dao.DaoFactory;
-import me.hero.user.dao.UserDao;
 import me.hero.user.domain.User;
+import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
 
-public class UserDaoTest {
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+import static org.junit.jupiter.api.Assertions.*;
+
+class UserDaoTest {
+
+    @Test
+    void addAndGet() throws SQLException, ClassNotFoundException {
         ApplicationContext context =
                 new AnnotationConfigApplicationContext(DaoFactory.class);
         UserDao dao = context.getBean("userDao", UserDao.class);
@@ -34,4 +38,5 @@ public class UserDaoTest {
             System.out.println("조회 테스트 성공");;
         }
     }
+
 }
