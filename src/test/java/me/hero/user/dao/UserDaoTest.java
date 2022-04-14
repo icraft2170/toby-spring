@@ -11,12 +11,15 @@ import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserDaoTest {
-
     @Test
     void addAndGet() throws SQLException, ClassNotFoundException {
         ApplicationContext context =
                 new AnnotationConfigApplicationContext(DaoFactory.class);
         UserDao dao = context.getBean("userDao", UserDao.class);
+
+        dao.deleteAll();
+        assertEquals(0, dao.getCount());
+
 
         User user = new User();
         user.setId("whiteship");
@@ -24,6 +27,7 @@ class UserDaoTest {
         user.setPassword("married");
 
         dao.add(user);
+        assertEquals(1, dao.getCount());
         User findUser = dao.get(user.getId());
 
         assertEquals(user.getName(), findUser.getName());
