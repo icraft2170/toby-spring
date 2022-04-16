@@ -1,6 +1,7 @@
 package me.hero.user.dao;
 
 import me.hero.user.domain.User;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -12,14 +13,23 @@ import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserDaoTest {
-    @Test
-    void addAndGet() throws SQLException, ClassNotFoundException {
+    UserDao dao;
+    User user1;
+    User user2;
+    User user3;
+    @BeforeEach
+    void setUp() {
         ApplicationContext context =
                 new AnnotationConfigApplicationContext(DaoFactory.class);
-        UserDao dao = context.getBean("userDao", UserDao.class);
-        User user1 = new User("gyumme", "박성철", "springno1");
-        User user2 = new User("leegw700", "이길원", "springno2");
+        this.dao = context.getBean("userDao", UserDao.class);
+        this.user1 = new User("gyumme", "박성철", "springno1");
+        this.user2 = new User("leegw700", "이길원", "springno2");
+        this.user3 = new User("bumjin", "박범진", "springno3");
 
+    }
+
+    @Test
+    void addAndGet() throws SQLException, ClassNotFoundException {
         dao.deleteAll();
         assertEquals(0, dao.getCount());
 
@@ -37,13 +47,6 @@ class UserDaoTest {
 
     @Test
     void count() throws SQLException, ClassNotFoundException {
-        ApplicationContext context =
-                new AnnotationConfigApplicationContext(DaoFactory.class);
-        UserDao dao = context.getBean("userDao", UserDao.class);
-        User user1 = new User("gyumme", "박성철", "springno1");
-        User user2 = new User("leegw700", "이길원", "springno2");
-        User user3 = new User("bumjin", "박범진", "springno3");
-
         dao.deleteAll();
         assertEquals(0, dao.getCount());
 
@@ -60,9 +63,6 @@ class UserDaoTest {
 
     @Test
     void getUserFailure() throws SQLException, ClassNotFoundException {
-        ApplicationContext context =
-                new AnnotationConfigApplicationContext(DaoFactory.class);
-        UserDao dao = context.getBean("userDao", UserDao.class);
         dao.deleteAll();
         assertEquals(0, dao.getCount());
 
