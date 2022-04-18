@@ -27,8 +27,12 @@ public class UserDao {
         } catch (SQLException e) {
          throw e;
         } finally {
-            ps.close();
-            c.close();
+            if (ps != null) {
+                try { ps.close(); } catch (SQLException e){}
+            }
+            if (c != null) {
+                try { c.close(); } catch (SQLException e){}
+            }
         }
     }
 
@@ -57,9 +61,15 @@ public class UserDao {
         } catch (SQLException e) {
             throw e;
         } finally {
-            rs.close();
-            ps.close();
-            c.close();
+            if (rs != null) {
+                try { rs.close(); } catch (SQLException e){}
+            }
+            if (ps != null) {
+                try { ps.close(); } catch (SQLException e){}
+            }
+            if (c != null) {
+                try { c.close(); } catch (SQLException e){}
+            }
         }
     }
 
@@ -74,8 +84,12 @@ public class UserDao {
         } catch (SQLException e) {
             throw e;
         }finally {
-            ps.close();
-            c.close();
+            if (ps != null) {
+                try { ps.close(); } catch (SQLException e){}
+            }
+            if (c != null) {
+                try { c.close(); } catch (SQLException e){}
+            }
         }
     }
 
@@ -94,9 +108,15 @@ public class UserDao {
         } catch (SQLException e) {
             throw e;
         } finally {
-            rs.close();
-            ps.close();
-            c.close();
+            if (rs != null) {
+                try { rs.close(); } catch (SQLException e){}
+            }
+            if (ps != null) {
+                try { ps.close(); } catch (SQLException e){}
+            }
+            if (c != null) {
+                try { c.close(); } catch (SQLException e){}
+            }
         }
     }
 }
