@@ -10,7 +10,7 @@ import javax.sql.DataSource;
 public class DaoFactory {
     @Bean
     public UserDao userDao() {
-        return new UserDao(dataSource());
+        return new UserDao(dataSource(), jdbcContext());
     }
 
     @Bean
@@ -23,5 +23,10 @@ public class DaoFactory {
         dataSource.setPassword("see3470");
 
         return dataSource;
+    }
+
+    @Bean
+    public JdbcContext jdbcContext() {
+        return new JdbcContext(dataSource());
     }
 }
