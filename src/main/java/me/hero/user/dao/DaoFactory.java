@@ -10,7 +10,7 @@ import javax.sql.DataSource;
 public class DaoFactory {
     @Bean
     public UserDao userDao() {
-        return new UserDaoDeleteAll(dataSource());
+        return new UserDao(dataSource());
     }
 
     @Bean
