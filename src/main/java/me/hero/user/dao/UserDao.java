@@ -10,8 +10,6 @@ import java.sql.*;
 import java.util.List;
 
 public class UserDao {
-    private final DataSource dataSource;
-    private final JdbcContext jdbcContext;
     private final JdbcTemplate jdbcTemplate;
     private RowMapper<User> userRowMapper = (rs, rowNum) -> {
         User user = new User();
@@ -22,10 +20,8 @@ public class UserDao {
     };
 
 
-    public UserDao(DataSource dataSource, JdbcContext jdbcContext) {
+    public UserDao(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
-        this.dataSource = dataSource;
-        this.jdbcContext = jdbcContext;
     }
 
     public void add(User user) throws SQLException {
@@ -36,8 +32,7 @@ public class UserDao {
 
     public User get(String id) throws SQLException {
         return this.jdbcTemplate.queryForObject("select * from users where id = ?",
-                new Object[]{id},
-                userRowMapper);
+                new Object[]{id}, userRowMapper);
     }
 
     public List<User> getAll() {
@@ -49,30 +44,7 @@ public class UserDao {
     }
 
     public int getCount() throws SQLException {
-        Connection c = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        try {
-            c = dataSource.getConnection();
-
-            ps = c.prepareStatement("select count(*) from users");
-
-            rs = ps.executeQuery();
-            rs.next();
-            return rs.getInt(1);
-        } catch (SQLException e) {
-            throw e;
-        } finally {
-            if (rs != null) {
-                try { rs.close(); } catch (SQLException e){}
-            }
-            if (ps != null) {
-                try { ps.close(); } catch (SQLException e){}
-            }
-            if (c != null) {
-                try { c.close(); } catch (SQLException e){}
-            }
-        }
+        return this.jdbcTemplate.queryForObject("select count(*) from users", Integer.class);
     }
 
 }

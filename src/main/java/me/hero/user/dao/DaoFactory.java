@@ -10,7 +10,7 @@ import javax.sql.DataSource;
 public class DaoFactory {
     @Bean
     public UserDao userDao() {
-        return new UserDao(dataSource(), jdbcContext());
+        return new UserDao(dataSource());
     }
 
     @Bean
@@ -25,8 +25,4 @@ public class DaoFactory {
         return dataSource;
     }
 
-    @Bean
-    public JdbcContext jdbcContext() {
-        return new JdbcContext(dataSource());
-    }
 }
